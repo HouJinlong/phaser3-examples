@@ -48,6 +48,7 @@ function create ()
             frame = 'hotdog';
         }
 
+        console.log('frame: ', frame);
         ts.setFrame(frame);
 
     }, this);

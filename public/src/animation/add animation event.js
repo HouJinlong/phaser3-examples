@@ -7,19 +7,61 @@ class Example extends Phaser.Scene
 
     preload ()
     {
-        this.load.atlas('gems', 'assets/tests/columns/gems.png', 'assets/tests/columns/gems.json');
-        // Local variable
+        this.load.atlas('jackpot', "assets/demo/jackpot.png",  "assets/demo/jackpot.json");
         this.y = 160;
     }
 
     create ()
     {
-        this.add.text(400, 32, 'Click to create animations', { color: '#00ff00' })
-            .setOrigin(0.5, 0);
 
-        //  Each time a new animation is added to the Animation Manager we'll call this function
-        this.anims.on(Phaser.Animations.Events.ADD_ANIMATION, this.addAnimation, this);
+        // let data = {}
+        // this.anims.generateFrameNames('jackpot').forEach(v => {
+        //     const key = v.frame.split('_')[0]
+        //     if(!data[key+'_']){
+        //         data[key+'_'] = 0
+        //     }
+        //     data[key+'_']+=1
+        // });
+        // let temp = []
+        // Object.keys(data).forEach((prefix)=>{
 
+        //     if( this.anims.generateFrameNames('jackpot',{ prefix,start: 1, end: data[prefix],suffix:'.png',zeroPad:5})){
+        //         temp.push(
+        //             `this.anims.generateFrameNames('jackpot',{ prefix:"${prefix}",start: 1, end: ${data[prefix]},suffix:'.png',zeroPad:5})`
+
+        //         )
+        //     }
+        // })
+        // console.log('temp: ', temp);
+        [
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"钱袋 橙色_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"钱袋 紫色_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"钱袋 绿色_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"钱袋 蓝色_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"动态效果_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"JACKPOT_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"头像动画 绿色_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"发射动画 绿色_\",start: 1, end: 20,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"发射 橙色_\",start: 1, end: 20,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"用户 蓝色_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"用户头像_\",start: 1, end: 50,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"发射_\",start: 1, end: 20,suffix:'.png',zeroPad:5})",
+            "this.anims.generateFrameNames('jackpot',{ prefix:\"发射 蓝色_\",start: 1, end: 20,suffix:'.png',zeroPad:5})"
+        ].map((v,i)=>{
+            const x = 100*(i%4+1)
+            const y = 100*(parseInt(i/4)+1)
+            const rambo = this.add.sprite( x, y, 'jackpot');
+            rambo.setDisplaySize(100,100)
+            rambo.anims.create({
+                key: 'walk',
+                frames:  eval(v),
+                repeat: -1,
+                // duration:1000,
+                // yoyo:true,
+            });
+            rambo.play('walk',);
+        })
+       return
         this.i = 0;
 
         //  Click to add an animation
